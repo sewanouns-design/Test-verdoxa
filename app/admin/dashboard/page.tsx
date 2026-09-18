@@ -11,7 +11,7 @@ export default function AdminDashboardPage() {
   const [tab, setTab] = useState<Tab>("questions");
   const router = useRouter();
   const [stats, setStats] = useState<{players:number; questions:number; topScore:number} | null>(null);
-  useEffect(() => { fetch("/api/admin/ranking").then(r => r.json()).then(j => { const rows = j.ranking || []; setStats({ players: rows.length, questions: 0, topScore: rows[0]?.best_score || 0 }); }).catch(() => {}); }, []);
+  useEffect(() => { fetch("/api/admin/ranking").then(r => r.json()).then(j => { const rows = j.scores || []; setStats({ players: rows.length, questions: 0, topScore: rows[0]?.best_score || 0 }); }).catch(() => {}); }, []);
 
   async function handleLogout() {
     await fetch("/api/admin/logout", { method: "POST" });

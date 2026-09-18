@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ADMIN_COOKIE_NAME, verifyAdminToken } from "@/lib/authToken";
+import { ADMIN_COOKIE_NAME, hashPassword } from "@/lib/authToken";
 
 // Protege l'espace admin (gestion des questions, reglages, classement) :
 // tableau de bord + toutes les routes API d'administration.
@@ -17,7 +17,8 @@ export async function middleware(req: NextRequest) {
   }
 
   const cookieValue = req.cookies.get(ADMIN_COOKIE_NAME)?.value;
-  if (!(await verifyAdminToken(cookieValue))) {
+  const expected = await hashPassword(process.env.ADMIN_PASSWORD || "");
+  if (!cookieValue || cookieValue !== expected) {
     if (pathname.startsWith("/api/")) {
       return NextResponse.json({ error: "Non autorise." }, { status: 401 });
     }

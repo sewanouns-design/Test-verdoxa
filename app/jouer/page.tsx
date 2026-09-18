@@ -115,6 +115,7 @@ function drawScrollAndBooks(ctx: CanvasRenderingContext2D, size: number) {
   });
 }
 
+const QUESTIONS_PER_LEVEL = 8;
 const STORAGE_KEY = "verdoxa.progress.v1";
 
 const POINTS_BY_DIFFICULTY: Record<InfiniteDifficulty, number> = {
@@ -192,7 +193,6 @@ interface SavedProgress {
   bestStreak: number;
   phase: "question" | "levelComplete";
   resetVersion?: number;
-  sessionId?: string;
 }
 
 function loadProgress(): SavedProgress | null {
@@ -238,7 +238,9 @@ export default function InfiniteQuizPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [maxIndexReached, setMaxIndexReached] = useState(0);
   const [askedIds, setAskedIds] = useState<string[]>([]);
-  const [levelAnswers, setLevelAnswers] = useState<(LevelAnswer | null)[]>(Array(8).fill(null));
+  const [levelAnswers, setLevelAnswers] = useState<(LevelAnswer | null)[]>(
+    Array(QUESTIONS_PER_LEVEL).fill(null)
+  );
   const [answering, setAnswering] = useState(false);
 
   const [score, setScore] = useState(0);
@@ -363,8 +365,6 @@ export default function InfiniteQuizPage() {
   const [resumeAvailable, setResumeAvailable] = useState<SavedProgress | null>(null);
   const autoAdvanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
-  const [questionsPerLevel, setQuestionsPerLevel] = useState(8);
-  const [sessionId, setSessionId] = useState("");
   const [timeSettings, setTimeSettings] = useState<Record<InfiniteDifficulty, number>>(TIME_BY_DIFFICULTY);
   const resetVersionRef = useRef<number>(1);
   const [cheatWarning, setCheatWarning] = useState("");
@@ -404,7 +404,7 @@ export default function InfiniteQuizPage() {
         setCurrentIndex(0);
         setMaxIndexReached(0);
         setAskedIds([]);
-        setLevelAnswers(Array(questionsPerLevel).fill(null));
+        setLevelAnswers(Array(QUESTIONS_PER_LEVEL).fill(null));
         setScore(0);
         setCorrectCount(0);
         setTotalAnswered(0);
@@ -466,7 +466,7 @@ export default function InfiniteQuizPage() {
       const res = await fetch("/api/quiz/infinite/answer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId, questionId: liveQuestion.id, selectedOption: -1, timedOut: true }),
+        body: JSON.stringify({ questionId: liveQuestion.id, selectedOption: -1, selectedText: "" }),
       });
       const json: AnswerFeedback = await res.json();
       json.correctOption = json.correctText ? liveQuestion.options.indexOf(json.correctText) : json.correctOption;
@@ -494,7 +494,6 @@ export default function InfiniteQuizPage() {
       const s = j.settings;
       if (s) {
         setTimeSettings({ facile: s.easy_seconds || 45, moyen: s.medium_seconds || 90, difficile: s.hard_seconds || 135, expert: s.expert_seconds || 180 });
-        setQuestionsPerLevel(Math.min(Math.max(Number(s.questions_per_level) || 8, 1), 20));
         resetVersionRef.current = s.reset_version || 1;
       }
       // On ne decide de proposer une reprise qu'une fois la version de
@@ -503,7 +502,7 @@ export default function InfiniteQuizPage() {
       // sa progression sauvegardee est perimee et ne doit pas etre
       // proposee -- elle recommence obligatoirement a zero.
       const saved = loadProgress();
-      if (saved && (saved.resetVersion || 1) === resetVersionRef.current) {
+      if (saved && (saved.resetVersion || 1) >= resetVersionRef.current) {
         setResumeAvailable(saved);
       } else if (saved) {
         clearProgress();
@@ -533,7 +532,6 @@ export default function InfiniteQuizPage() {
       bestStreak,
       phase: nextPhase || (phase === "levelComplete" ? "levelComplete" : "question"),
       resetVersion: resetVersionRef.current,
-      sessionId,
       ...overrides,
     };
     saveProgress(data);
@@ -557,20 +555,18 @@ export default function InfiniteQuizPage() {
     }
     setPhase(saved.phase);
     setResumeAvailable(null);
-    setSessionId(saved.sessionId || "");
   }
 
   function startFresh() {
     clearProgress();
     setResumeAvailable(null);
     setStudentName("");
-    setSessionId("");
     setLevel(1);
     setQuestions([]);
     setCurrentIndex(0);
     setMaxIndexReached(0);
     setAskedIds([]);
-    setLevelAnswers(Array(questionsPerLevel).fill(null));
+    setLevelAnswers(Array(QUESTIONS_PER_LEVEL).fill(null));
     setScore(0);
     setCorrectCount(0);
     setTotalAnswered(0);
@@ -589,10 +585,8 @@ export default function InfiniteQuizPage() {
         body: JSON.stringify({
           difficulty: difficultyForLevel(forLevel),
           excludeIds,
-          count: questionsPerLevel,
+          count: QUESTIONS_PER_LEVEL,
           studentName,
-          sessionId: sessionId || undefined,
-          level: forLevel,
         }),
       });
       const json = await res.json();
@@ -601,16 +595,13 @@ export default function InfiniteQuizPage() {
         setPhase("error");
         return;
       }
-      const serverCount = Math.min(Math.max(Number(json.questionsPerLevel) || json.questions.length || questionsPerLevel, 1), 20);
-      setQuestionsPerLevel(serverCount);
-      const freshAnswers = Array(serverCount).fill(null);
+      const freshAnswers = Array(QUESTIONS_PER_LEVEL).fill(null);
       setQuestions(json.questions);
       setCurrentIndex(0);
       setMaxIndexReached(0);
       setLevelAnswers(freshAnswers);
       setPhase("question");
       persist({
-        sessionId: json.sessionId || sessionId,
         level: forLevel,
         questions: json.questions,
         currentIndex: 0,
@@ -646,7 +637,7 @@ export default function InfiniteQuizPage() {
       const res = await fetch("/api/quiz/infinite/answer", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId, questionId: current.id, selectedOption: optionIdx }),
+        body: JSON.stringify({ questionId: current.id, selectedOption: optionIdx, selectedText: current.options[optionIdx] }),
       });
       const json: AnswerFeedback = await res.json();
       json.correctOption = json.correctText ? current.options.indexOf(json.correctText) : json.correctOption;
@@ -668,7 +659,7 @@ export default function InfiniteQuizPage() {
       nextAskedIds = [...askedIds, current.id];
       setAskedIds(nextAskedIds);
       if (json.correct) {
-        nextScore += json.points || 0;
+        nextScore += json.points || current.points || POINTS_BY_DIFFICULTY[current.difficulty];
         nextCorrect += 1;
         nextStreak += 1;
         nextBestStreak = Math.max(bestStreak, nextStreak);
@@ -712,8 +703,11 @@ export default function InfiniteQuizPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          sessionId,
           studentName,
+          level: reachedLevel,
+          score: finalScore,
+          correct: finalCorrect,
+          total: finalTotal,
           contactEmail,
           whatsapp,
           contactConsent,
@@ -736,7 +730,7 @@ export default function InfiniteQuizPage() {
     curAskedIds: string[]
   ) {
     const nextMax = Math.max(maxIndexReached, currentIndex + 1);
-    if (currentIndex + 1 < questionsPerLevel) {
+    if (currentIndex + 1 < QUESTIONS_PER_LEVEL) {
       setCurrentIndex((i) => i + 1);
       setMaxIndexReached(nextMax);
       persist({ currentIndex: currentIndex + 1, maxIndexReached: nextMax });
@@ -781,11 +775,11 @@ export default function InfiniteQuizPage() {
 
   const current = questions[currentIndex];
   const currentAnswer = levelAnswers[currentIndex] || null;
-  const progressPct = ((maxIndexReached + (levelAnswers[maxIndexReached] ? 1 : 0)) / questionsPerLevel) * 100;
+  const progressPct = ((maxIndexReached + (levelAnswers[maxIndexReached] ? 1 : 0)) / QUESTIONS_PER_LEVEL) * 100;
   const difficulty = difficultyForLevel(level);
 
   const levelCorrectCount = levelAnswers.filter((a) => a?.correct).length;
-  const levelNoteOn20 = Math.round((levelCorrectCount / questionsPerLevel) * 20);
+  const levelNoteOn20 = Math.round((levelCorrectCount / QUESTIONS_PER_LEVEL) * 20);
 
   if (phase === "intro") {
     return (
@@ -1018,7 +1012,7 @@ export default function InfiniteQuizPage() {
         </div>
         <div className="row-between" style={{ marginTop: 4 }}>
           <span className="muted">
-            Question {currentIndex + 1}/{questionsPerLevel}
+            Question {currentIndex + 1}/{QUESTIONS_PER_LEVEL}
           </span>
           <span className="muted">
             {score} pts {streak > 1 && <span className="streak-badge">🔥 série de {streak}</span>}
@@ -1088,7 +1082,7 @@ export default function InfiniteQuizPage() {
         )}
         {currentAnswer && !currentAnswer.correct && !isReviewing && (
           <button type="button" className="btn small" onClick={handleManualNext}>
-            {currentIndex + 1 < questionsPerLevel ? "Suivant →" : "Terminer le niveau"}
+            {currentIndex + 1 < QUESTIONS_PER_LEVEL ? "Suivant →" : "Terminer le niveau"}
           </button>
         )}
       </div>
