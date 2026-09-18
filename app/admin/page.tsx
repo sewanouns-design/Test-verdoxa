@@ -35,7 +35,7 @@ export default function SuperAdminLoginPage() {
       <div className="card">
         <h1>Accès administrateur</h1>
         <p className="subtitle">
-          Gestion des questions, des réglages et du classement de Vedoxa.
+          Gestion des questions, des réglages et du classement de Verdoxa.
         </p>
         <label htmlFor="pw">Mot de passe</label>
         <input

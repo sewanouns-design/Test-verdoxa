@@ -782,3 +782,72 @@ textarea:focus-visible {
 
 .fbi-question-toolbar { margin-top: 8px; }
 .fbi-question-toolbar div[style*="text-align"] { background: #eef3ff; border-radius: 10px; padding: 8px; color: var(--navy); }
+
+/* ---------- Accueil Verdoxa ---------- */
+.home-page { max-width: 900px; margin: 0 auto; }
+.hero-banner-modern { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(190px, .65fr); gap: 18px; align-items: center; min-height: 370px; padding: 42px 42px 38px; text-align: left; overflow: hidden; position: relative; background: linear-gradient(120deg, #eaf4ee 0%, #f9f3e3 100%); }
+.hero-copy { position: relative; z-index: 1; }
+.eyebrow { display: inline-flex; align-items: center; gap: 7px; color: var(--red); font-size: .72rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.hero-banner-modern h1 { font-size: clamp(2.6rem, 8vw, 4.8rem); line-height: .95; letter-spacing: -.05em; margin: 14px 0; }
+.hero-lead { color: var(--navy); font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 1.65rem); line-height: 1.2; max-width: 510px; margin: 0 0 10px; }
+.hero-support { color: var(--muted); max-width: 510px; margin: 0; font-size: .96rem; }
+.hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+.hero-primary { background: var(--navy); box-shadow: 0 8px 18px rgba(13,75,62,.18); }
+.hero-secondary { background: rgba(255,255,255,.68); color: var(--navy); border: 1px solid rgba(13,75,62,.18); }
+.disabled-link { opacity: .6; cursor: default; }
+.hero-proof { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 24px; color: var(--muted); font-size: .72rem; }
+.hero-proof strong { color: var(--navy); }
+.hero-art { position: relative; min-height: 230px; display: grid; place-items: center; }
+.hero-emblem { width: 158px; height: 158px; border-radius: 42% 58% 50% 50%; background: white; padding: 24px; box-shadow: 0 18px 35px rgba(13,75,62,.18); transform: rotate(-8deg); position: relative; z-index: 1; }
+.hero-emblem img { width: 100%; height: 100%; object-fit: contain; }
+.hero-orbit { position: absolute; border: 1px solid rgba(13,75,62,.18); border-radius: 50%; transform: rotate(25deg); }
+.orbit-one { width: 215px; height: 120px; }
+.orbit-two { width: 160px; height: 230px; transform: rotate(-30deg); }
+.hero-spark { position: absolute; color: var(--red); font-size: 1.6rem; }
+.spark-one { top: 18px; right: 24px; }
+.spark-two { bottom: 16px; left: 20px; color: var(--navy); }
+.home-section { margin: 34px 0; }
+.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 16px; }
+.section-heading h2, .challenge-content h2, .progress-card h2, .ranking-card h2 { margin: 6px 0 0; }
+.section-heading > p { color: var(--muted); max-width: 350px; margin: 0; font-size: .88rem; }
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.feature-card { background: rgba(255,255,255,.72); border: 1px solid var(--border); border-radius: 16px; padding: 18px; transition: transform .18s ease, box-shadow .18s ease; }
+.feature-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(21,64,48,.08); }
+.feature-card-accent { background: var(--navy); color: white; border-color: var(--navy); }
+.feature-card-accent h3, .feature-card-accent p { color: white; }
+.feature-card-accent p { opacity: .76; }
+.feature-icon { font-size: 1.5rem; }
+.feature-card h3 { color: var(--navy); font-family: var(--font-display); font-size: 1.02rem; line-height: 1.15; margin: 13px 0 8px; }
+.feature-card p { color: var(--muted); font-size: .82rem; margin: 0; }
+.challenge-card { display: flex; align-items: center; gap: 16px; background: var(--navy); color: white; border-radius: 18px; padding: 22px; margin: 26px 0; box-shadow: 0 12px 28px rgba(13,75,62,.14); }
+.challenge-icon { width: 54px; height: 54px; flex: 0 0 54px; display: grid; place-items: center; border-radius: 16px; background: rgba(240,185,61,.18); font-size: 1.55rem; }
+.challenge-content { flex: 1; }
+.challenge-content h2 { color: white; font-size: 1.25rem; }
+.challenge-content p { color: rgba(255,255,255,.72); margin: 5px 0 0; font-size: .86rem; }
+.challenge-card .eyebrow { color: #f0c95f; }
+.challenge-btn { background: #f0b93d; color: #26351d; white-space: nowrap; }
+.challenge-closed { background: #446d62; }
+.home-bottom-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 14px; }
+.progress-card, .ranking-card { margin-bottom: 0; }
+.progress-emoji { font-size: 1.7rem; }
+.level-road { display: flex; align-items: center; margin-top: 24px; }
+.level-dot { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 50%; background: #e7eee8; color: var(--muted); font-size: .72rem; font-weight: 800; }
+.level-dot.active { background: var(--navy); color: white; }
+.level-line { height: 3px; flex: 1; background: #e7eee8; }
+.level-labels { display: flex; justify-content: space-between; color: var(--muted); font-size: .68rem; margin-top: 7px; }
+.text-link { color: var(--navy); font-weight: 700; font-size: .84rem; text-decoration: none; }
+.text-link:hover { text-decoration: underline; }
+.home-signoff { color: var(--muted); text-align: center; font-size: .78rem; margin: 30px 0 0; }
+.home-signoff strong { color: var(--navy); }
+@media (max-width: 620px) {
+  .hero-banner-modern { grid-template-columns: 1fr; padding: 30px 22px 26px; min-height: 0; }
+  .hero-art { min-height: 170px; order: -1; }
+  .hero-emblem { width: 112px; height: 112px; padding: 18px; }
+  .orbit-one { width: 170px; height: 95px; }
+  .orbit-two { width: 125px; height: 175px; }
+  .section-heading { display: block; }
+  .section-heading > p { margin-top: 10px; }
+  .feature-grid, .home-bottom-grid { grid-template-columns: 1fr; }
+  .challenge-card { align-items: flex-start; flex-wrap: wrap; }
+  .challenge-btn { width: 100%; text-align: center; }
+}

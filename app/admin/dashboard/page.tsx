@@ -19,7 +19,7 @@ export default function AdminDashboardPage() {
   return (
     <div>
       <div className="row-between" style={{ marginBottom: 16 }}>
-        <h1 style={{ margin: 0 }}>Administration Vedoxa</h1>
+        <h1 style={{ margin: 0 }}>Administration Verdoxa</h1>
         <button type="button" className="btn secondary small" onClick={handleLogout}>
           Se déconnecter
         </button>

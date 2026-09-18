@@ -1,4 +1,4 @@
-# Vedoxa
+# Verdoxa
 
 Test public de connaissance biblique, a difficulte croissante (facile
 -> moyen -> difficile -> expert), avec classement. Ouvert a tous, sans
@@ -13,7 +13,7 @@ dans une prochaine etape.
 
 - [Next.js 14](https://nextjs.org/) (App Router) + TypeScript
 - [Supabase](https://supabase.com/) (base de donnees + cle service role)
-- Deploiement prevu sur [Vercel](https://vercel.com/), domaine `vedoxa.org`
+- Deploiement prevu sur [Vercel](https://vercel.com/), domaine `verdoxa.org`
 
 ## Demarrage local
 
@@ -37,7 +37,7 @@ dans une prochaine etape.
 
 ## Prochaines etapes
 
-1. Deployer sur Vercel et connecter le domaine `vedoxa.org`
+1. Deployer sur Vercel et connecter le domaine `verdoxa.org`
 2. Ajouter le catalogue de recompenses (lots, seuils d'eligibilite,
    attribution aux gagnants)
 3. Etoffer la banque de questions par niveau

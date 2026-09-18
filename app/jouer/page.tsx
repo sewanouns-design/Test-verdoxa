@@ -116,7 +116,7 @@ function drawScrollAndBooks(ctx: CanvasRenderingContext2D, size: number) {
 }
 
 const QUESTIONS_PER_LEVEL = 8;
-const STORAGE_KEY = "vedoxa.progress.v1";
+const STORAGE_KEY = "verdoxa.progress.v1";
 
 const POINTS_BY_DIFFICULTY: Record<InfiniteDifficulty, number> = {
   facile: 10,
@@ -288,7 +288,7 @@ export default function InfiniteQuizPage() {
 
     ctx.font = `700 54px Georgia, serif`;
     ctx.fillStyle = "#ffffff";
-    ctx.fillText("VEDOXA", size / 2, 350);
+    ctx.fillText("Verdoxa", size / 2, 350);
 
     ctx.font = `700 46px Georgia, serif`;
     ctx.fillStyle = "#d4a017";
@@ -333,7 +333,7 @@ export default function InfiniteQuizPage() {
     try {
       const origin = typeof window !== "undefined" ? window.location.origin : "";
       const link = `${origin}`;
-      const shareText = `J'ai atteint le niveau ${level} (${DIFFICULTY_LABEL[difficultyForLevel(level)]}) sur Vedoxa ! 🔥 À ton tour, relève le défi : ${link}`;
+      const shareText = `J'ai atteint le niveau ${level} (${DIFFICULTY_LABEL[difficultyForLevel(level)]}) sur Verdoxa ! 🔥 À ton tour, relève le défi : ${link}`;
 
       const image = await drawTCBImage();
       const file = image ? new File([image.blob], "defi-biblique.png", { type: "image/png" }) : null;
@@ -786,7 +786,7 @@ export default function InfiniteQuizPage() {
       <div>
         <div className="hero-banner">
           <div className="hero-badge">🔥</div>
-          <h1>VEDOXA</h1>
+          <h1>Verdoxa</h1>
           <p>Enchaîne les niveaux et vois jusqu&apos;où tu peux aller !</p>
         </div>
 
