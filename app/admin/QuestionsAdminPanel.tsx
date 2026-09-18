@@ -13,7 +13,11 @@ export default function TestConnaissanceBibliqueAdminPanel() {
   async function saveQuestion() { if (!editing) return; const r = await fetch("/api/quiz/admin", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify(editing) }); setMessage(r.ok ? "Question enregistrée." : "Erreur."); if (r.ok) { setEditing(null); load(); } }
   async function remove(id: string) { if (!confirm("Supprimer cette question ?")) return; await fetch(`/api/quiz/admin?id=${id}`, { method: "DELETE" }); load(); }
   return <div>
-    <div className="card"><h2>TEST CONNAISSANCE BIBLIQUE</h2><p className="muted">Gestion réservée au super-admin : réglages et banque de questions.</p><form onSubmit={saveSettings}>
+    <div className="card"><h2>Contenus publics</h2><p className="muted">Modifie les textes visibles sur l’accueil sans toucher au code.</p><form onSubmit={saveSettings}>
+      {[['title','Nom du défi'],['subtitle','Sous-titre du défi'],['hero_support','Phrase d’accroche'],['intro_title','Titre de la section découverte'],['intro_text','Texte de la section découverte'],['challenge_title','Titre du défi du moment'],['challenge_text','Texte du défi du moment'],['signoff','Signature de l’accueil']].map(([key,label]) => <div key={key}><label>{label}</label><input value={settings[key] || ''} onChange={e => setSettings({...settings, [key]: e.target.value})} /></div>)}
+      <button className="btn">Enregistrer les contenus</button>
+    </form></div>
+    <div className="card"><h2>Réglages du défi</h2><p className="muted">Gestion réservée au super-admin : réglages et banque de questions.</p><form onSubmit={saveSettings}>
       <label>Titre public</label><input value={settings.title || ""} onChange={e => setSettings({...settings, title: e.target.value})} />
       <label>Sous-titre</label><input value={settings.subtitle || ""} onChange={e => setSettings({...settings, subtitle: e.target.value})} />
       <label><input type="checkbox" checked={!!settings.is_active} onChange={e => setSettings({...settings, is_active: e.target.checked})} /> Test actif</label>

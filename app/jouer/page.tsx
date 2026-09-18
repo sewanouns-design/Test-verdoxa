@@ -333,7 +333,7 @@ export default function InfiniteQuizPage() {
     try {
       const origin = typeof window !== "undefined" ? window.location.origin : "";
       const link = `${origin}`;
-      const shareText = `J'ai atteint le niveau ${level} (${DIFFICULTY_LABEL[difficultyForLevel(level)]}) sur Verdoxa ! 🔥 À ton tour, relève le défi : ${link}`;
+      const shareText = `J'ai atteint le niveau ${level} (${DIFFICULTY_LABEL[difficultyForLevel(level)]}) sur Verdoxa ! À ton tour, relève le défi : ${link}`;
 
       const image = await drawTCBImage();
       const file = image ? new File([image.blob], "defi-biblique.png", { type: "image/png" }) : null;
@@ -841,7 +841,7 @@ export default function InfiniteQuizPage() {
               type="text"
               value={studentName}
               onChange={(e) => setStudentName(e.target.value)}
-              placeholder="Ex: JESUGNON Jean"
+              placeholder="Ex : Ton prénom"
             />
 
             <details style={{ marginTop: 16 }}>

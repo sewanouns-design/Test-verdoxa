@@ -23,17 +23,10 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
       { src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
       { src: "/icon-512-maskable.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
-    shortcuts: [
-      {
-        name: "Acces Moniteur",
-        url: "/admin",
-        icons: [{ src: "/icon-192.png", sizes: "192x192", type: "image/png" }],
-      },
-      {
-        name: "Défi public TEST CONNAISSANCE BIBLIQUE",
-        url: "/",
-        icons: [{ src: "/icon-192.png", sizes: "192x192", type: "image/png" }],
-      },
-    ],
+    shortcuts: [{
+      name: "Relever le défi",
+      url: "/jouer",
+      icons: [{ src: "/icon-192.png", sizes: "192x192", type: "image/png" }],
+    }],
   };
 }

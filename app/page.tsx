@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { getSiteSettings } from "@/lib/siteSettings";
 
 export const dynamic = "force-dynamic";
 
 export default async function BibleKnowledgePage() {
+  const settings = await getSiteSettings();
   const { data } = await supabaseAdmin
     .from("fbi_settings")
     .select("title, subtitle, is_active")
@@ -11,7 +13,7 @@ export default async function BibleKnowledgePage() {
     .maybeSingle();
 
   const configuredTitle = data?.title?.trim();
-  const title = configuredTitle && configuredTitle.toLowerCase() !== "vedoxa"
+  const title = configuredTitle && configuredTitle.toLowerCase() !== "verdoxa"
     ? configuredTitle
     : "Verdoxa";
   const subtitle = data?.subtitle?.trim() && data.subtitle.toLowerCase() !== "grandis dans la connaissance de la parole, un défi à la fois."
@@ -25,7 +27,7 @@ export default async function BibleKnowledgePage() {
           <span className="eyebrow"><span aria-hidden="true">✦</span> Apprendre · jouer · grandir</span>
           <h1>{title}</h1>
           <p className="hero-lead">{subtitle}</p>
-          <p className="hero-support">Des quiz bibliques vivants, une progression à ton rythme et une communauté qui avance avec toi.</p>
+          <p className="hero-support">{settings.heroSupport}</p>
           <div className="hero-actions">
             {data?.is_active !== false ? (
               <Link href="/jouer" className="btn hero-primary">Lancer le défi <span aria-hidden="true">→</span></Link>
@@ -55,9 +57,9 @@ export default async function BibleKnowledgePage() {
         <div className="section-heading">
           <div>
             <span className="eyebrow">Ton parcours commence aujourd’hui</span>
-            <h2>La Bible, en mode défi.</h2>
+            <h2>{settings.introTitle}</h2>
           </div>
-          <p>Chaque question est une occasion de comprendre, de retenir et d’aller un peu plus loin.</p>
+          <p>{settings.introText}</p>
         </div>
         <div className="feature-grid">
           <article className="feature-card">
@@ -83,8 +85,8 @@ export default async function BibleKnowledgePage() {
           <div className="challenge-icon" aria-hidden="true">🔥</div>
           <div className="challenge-content">
             <span className="eyebrow">Défi du moment</span>
-            <h2>Prêt à tester ce que tu sais déjà ?</h2>
-            <p>Un quiz public ouvert à tous. Pas besoin d’être expert : viens apprendre en jouant.</p>
+            <h2>{settings.challengeTitle}</h2>
+            <p>{settings.challengeText}</p>
           </div>
           <Link href="/jouer" className="btn challenge-btn">Je relève le défi</Link>
         </section>
@@ -122,7 +124,7 @@ export default async function BibleKnowledgePage() {
         </div>
       </section>
 
-      <p className="home-signoff"><strong>Verdoxa</strong> — la connaissance qui prend vie.</p>
+      <p className="home-signoff">{settings.signoff}</p>
     </div>
   );
 }
