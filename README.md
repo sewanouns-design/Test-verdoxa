@@ -1,43 +1,31 @@
 # Verdoxa
 
-Test public de connaissance biblique, a difficulte croissante (facile
--> moyen -> difficile -> expert), avec classement. Ouvert a tous, sans
-inscription -- juste un nom pour participer.
+Plateforme de quiz bibliques et de progression spirituelle. Verdoxa aide chacun à grandir dans la connaissance de la Parole grâce à des défis, des parcours et des repères de progression.
 
-Ce depot est le point de depart technique du projet : le moteur du
-test (questions, niveaux, chronometre, score, classement, image de
-partage) est deja fonctionnel. Le catalogue de recompenses viendra
-dans une prochaine etape.
+## Fonctionnalités intégrées
+
+L’espace `/parcours` rassemble un MVP local immédiatement utilisable : verset du jour avec sauvegarde, partage et lecture audio, série de régularité, défi hebdomadaire sur 7 jours, XP et niveaux, badges, journal spirituel privé, rappels optionnels, mode texte agrandi, mode sombre, partage avec un proche et accès au classement public. Le moteur `/jouer` conserve ses niveaux, son chronomètre, ses explications et ses références bibliques.
+
+Les données de l’espace personnel sont stockées localement sur l’appareil pour fonctionner sans inscription. La migration `supabase/migrations/001_spiritual_features.sql` prépare la synchronisation future des profils, versets, journaux et groupes lorsque l’authentification sera activée.
 
 ## Stack
 
 - [Next.js 14](https://nextjs.org/) (App Router) + TypeScript
-- [Supabase](https://supabase.com/) (base de donnees + cle service role)
-- Deploiement prevu sur [Vercel](https://vercel.com/), domaine `verdoxa.org`
+- [Supabase](https://supabase.com/) (base de données + clé service role)
+- Déploiement prévu sur [Vercel](https://vercel.com/)
 
-## Demarrage local
+## Démarrage local
 
 1. `npm install`
-2. Copier `.env.example` en `.env.local` et renseigner :
-   - `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` (Supabase > Project Settings > API)
-   - `ADMIN_PASSWORD` (mot de passe de l'espace `/admin`)
-3. Executer `supabase/schema.sql` dans Supabase > SQL Editor (une seule fois)
-4. `npm run dev` puis ouvrir http://localhost:3000
+2. Copier `.env.example` en `.env.local` et renseigner `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` et `ADMIN_PASSWORD`.
+3. Exécuter `supabase/schema.sql` puis, si la persistance des fonctionnalités est souhaitée, `supabase/migrations/001_spiritual_features.sql` dans Supabase.
+4. `npm run dev` puis ouvrir `http://localhost:3000`.
 
-## Structure
+## Routes principales
 
-- `/` -- page d'accueil du test public
-- `/jouer` -- le quiz lui-meme (niveaux, chronometre, score)
-- `/jouer/classement` -- classement public
-- `/admin` -- connexion administrateur
-- `/admin/dashboard` -- gestion des questions, des reglages et du classement
-- `lib/infiniteQuestions.ts` -- banque de questions de depart (utilisee
-  pour remplir la base au premier lancement)
-- `supabase/schema.sql` -- schema complet de la base
-
-## Prochaines etapes
-
-1. Deployer sur Vercel et connecter le domaine `verdoxa.org`
-2. Ajouter le catalogue de recompenses (lots, seuils d'eligibilite,
-   attribution aux gagnants)
-3. Etoffer la banque de questions par niveau
+- `/` — accueil Verdoxa
+- `/jouer` — quiz biblique, niveaux, chronomètre, scores et explications
+- `/parcours` — espace personnel spirituel et gamification
+- `/jouer/classement` — classement public
+- `/admin` — administration
+- `/admin/dashboard` — questions, réglages et classement

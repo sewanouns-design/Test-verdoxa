@@ -883,3 +883,69 @@ textarea:focus-visible {
   .quiz-steps span { font-size: .72rem; }
   .quiz-start-btn { width: 100%; }
 }
+
+/* ---------- Mon parcours : spiritualite + gamification ---------- */
+.journey-page { max-width: 900px; margin: 0 auto; }
+.journey-hero { display: grid; grid-template-columns: 1.25fr .75fr; gap: 20px; align-items: center; padding: 32px; border-radius: 22px; color: white; background: radial-gradient(circle at 85% 10%, rgba(240,185,61,.3), transparent 35%), linear-gradient(135deg, var(--navy), var(--navy-deep)); box-shadow: 0 14px 30px rgba(13,75,62,.16); }
+.journey-hero h1 { color: white; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1; margin: 12px 0; letter-spacing: -.04em; }
+.journey-hero p { color: rgba(255,255,255,.76); max-width: 520px; margin: 0; }
+.journey-hero .eyebrow { color: #f0c95f; }
+.journey-level { padding: 18px; border: 1px solid rgba(255,255,255,.18); border-radius: 16px; background: rgba(255,255,255,.1); }
+.journey-level span, .journey-level strong, .journey-level small { display: block; }
+.journey-level strong { font-family: var(--font-display); font-size: 2rem; margin: 2px 0 10px; }
+.journey-level small { color: rgba(255,255,255,.64); margin-top: 8px; font-size: .7rem; }
+.xp-track { height: 8px; background: rgba(255,255,255,.18); border-radius: 999px; overflow: hidden; }
+.xp-track i { display: block; height: 100%; border-radius: inherit; background: #f0b93d; }
+.journey-grid { display: grid; gap: 14px; }
+.journey-top-grid { grid-template-columns: 1.35fr .65fr; margin-top: 16px; }
+.journey-bottom-grid { grid-template-columns: 1.1fr .9fr; }
+.journey-card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 22px; margin-bottom: 14px; box-shadow: 0 5px 16px rgba(21,64,48,.04); }
+.card-kicker, .section-heading.compact { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.card-kicker { color: var(--muted); font-size: .76rem; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
+.theme-pill, .badge-count { color: var(--navy); background: #eaf4ed; border-radius: 999px; padding: 4px 9px; font-size: .7rem; }
+.verse-card blockquote { color: var(--navy); font-family: var(--font-display); font-size: clamp(1.35rem, 3vw, 1.9rem); line-height: 1.2; margin: 24px 0 13px; }
+.verse-reference { color: var(--red); font-weight: 800; margin: 0; }
+.card-actions { display: flex; gap: 8px; margin-top: 18px; }
+.streak-card { background: linear-gradient(145deg, #fffaf0, #f7efda); }
+.big-emoji { display: block; font-size: 2.1rem; margin-bottom: 8px; }
+.streak-card strong { display: block; color: var(--navy); font-family: var(--font-display); font-size: 2.7rem; line-height: 1; margin: 8px 0; }
+.streak-card p { color: var(--muted); font-size: .84rem; margin: 0 0 16px; }
+.weekly-card { display: flex; align-items: center; justify-content: space-between; gap: 20px; background: #f2f7f1; }
+.weekly-card h2 { color: var(--navy); margin: 7px 0 4px; }
+.week-dots { display: flex; gap: 7px; flex-shrink: 0; }
+.week-dots span { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 50%; background: white; color: var(--muted); font-size: .72rem; font-weight: 800; border: 1px solid var(--border); }
+.week-dots span.done { background: var(--navy); color: white; border-color: var(--navy); }
+.badge-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 9px; margin-top: 18px; }
+.journey-badge { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 13px 5px; border-radius: 13px; background: #f6f8f5; }
+.journey-badge > span { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: white; font-size: 1.25rem; margin-bottom: 8px; }
+.journey-badge strong { color: var(--navy); font-size: .72rem; }
+.journey-badge small { color: var(--muted); font-size: .62rem; line-height: 1.2; margin-top: 3px; }
+.journey-badge.locked { opacity: .45; filter: grayscale(1); }
+.journal-card textarea { min-height: 130px; margin-top: 12px; background: #fbfdfb; }
+.saved-note { color: var(--muted); font-size: .68rem; }
+.tools-card h2 { margin: 7px 0 18px; }
+.setting-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 13px 0; border-top: 1px solid var(--border); margin: 0; }
+.setting-row span, .setting-row b, .setting-row small { display: block; }
+.setting-row b { color: var(--navy); font-size: .84rem; }
+.setting-row small { color: var(--muted); font-size: .7rem; font-weight: 400; margin-top: 2px; }
+.setting-row input { width: 18px; height: 18px; accent-color: var(--navy); }
+.setting-button { margin-top: 14px; }
+.community-card { display: flex; align-items: center; gap: 16px; background: linear-gradient(120deg, #eaf4ee, #fffaf0); }
+.community-card h2 { margin: 6px 0 3px; font-size: 1.15rem; }
+.community-card p { margin: 0; }
+.community-card > :nth-child(2) { flex: 1; }
+.community-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: white; font-size: 1.4rem; }
+.large-text { font-size: 1.12rem; }
+.verdoxa-dark body { background: #10201c; color: #eef5ef; }
+.verdoxa-dark .journey-card, .verdoxa-dark .card { background: #193129; border-color: #315347; }
+.verdoxa-dark .journey-card h2, .verdoxa-dark .verse-card blockquote, .verdoxa-dark .streak-card strong, .verdoxa-dark .feature-card h3 { color: #eaf5ec; }
+.verdoxa-dark .muted, .verdoxa-dark .streak-card p, .verdoxa-dark .journey-badge small { color: #b9c8be; }
+@media (max-width: 700px) {
+  .journey-hero, .journey-top-grid, .journey-bottom-grid { grid-template-columns: 1fr; }
+  .journey-hero { padding: 25px 20px; }
+  .weekly-card, .community-card { align-items: flex-start; flex-direction: column; }
+  .week-dots { width: 100%; justify-content: space-between; }
+  .badge-grid { grid-template-columns: repeat(3, 1fr); }
+  .community-card .btn { width: 100%; }
+}
+@media (max-width: 430px) { .badge-grid { grid-template-columns: repeat(2, 1fr); } }
