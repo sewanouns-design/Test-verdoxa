@@ -13,7 +13,7 @@ export async function PUT(req: NextRequest) {
   const expected = await hashPassword(process.env.ADMIN_PASSWORD || "");
   if (!token || !expected || token !== expected) return NextResponse.json({ error: "Non autorisé." }, { status: 401 });
   const body = await req.json().catch(() => ({}));
-  const allowed = ["title","subtitle","intro_text","hero_support","intro_title","challenge_title","challenge_text","signoff","is_active","questions_per_level","easy_seconds","medium_seconds","hard_seconds","expert_seconds","easy_points","medium_points","hard_points","expert_points"];
+  const allowed = ["title","subtitle","intro_text","is_active","questions_per_level","easy_seconds","medium_seconds","hard_seconds","expert_seconds","easy_points","medium_points","hard_points","expert_points"];
   const patch: Record<string, any> = {};
   for (const key of allowed) if (body[key] !== undefined) patch[key] = body[key];
   for (const key of ["questions_per_level","easy_seconds","medium_seconds","hard_seconds","expert_seconds","easy_points","medium_points","hard_points","expert_points"]) if (patch[key] !== undefined) patch[key] = Math.max(1, Math.floor(Number(patch[key]) || 1));

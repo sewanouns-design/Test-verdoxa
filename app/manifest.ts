@@ -13,7 +13,7 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
   return {
     name: settings.siteName,
     short_name: shortName,
-    description: "Grandir dans la connaissance de la Parole de Dieu grâce à des quiz et des tests bibliques.",
+    description: "Evaluations hebdomadaires en ligne",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
@@ -23,10 +23,17 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
       { src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
       { src: "/icon-512-maskable.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
-    shortcuts: [{
-      name: "Relever le défi",
-      url: "/jouer",
-      icons: [{ src: "/icon-192.png", sizes: "192x192", type: "image/png" }],
-    }],
+    shortcuts: [
+      {
+        name: "Acces Moniteur",
+        url: "/admin",
+        icons: [{ src: "/icon-192.png", sizes: "192x192", type: "image/png" }],
+      },
+      {
+        name: "Défi public TEST CONNAISSANCE BIBLIQUE",
+        url: "/",
+        icons: [{ src: "/icon-192.png", sizes: "192x192", type: "image/png" }],
+      },
+    ],
   };
 }

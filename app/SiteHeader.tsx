@@ -24,9 +24,9 @@ export default function SiteHeader({
           </span>
           <span className="site-title">{siteName}</span>
         </Link>
-        <nav className="site-nav" aria-label="Navigation principale">
-          <Link href="/jouer/classement" className="header-menu-link">🏆 Classement</Link>
-        </nav>
+        <Link href="/jouer/classement" className="header-menu-link">
+          🏆 Classement
+        </Link>
       </div>
     </header>
   );

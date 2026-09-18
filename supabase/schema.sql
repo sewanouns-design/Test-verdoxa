@@ -1,6 +1,6 @@
--- Schema Supabase pour Verdoxa (v1 -- moteur du test de connaissance
+-- Schema Supabase pour Vedoxa (v1 -- moteur du test de connaissance
 -- biblique public, a difficulte croissante, avec classement).
--- A executer une seule fois dans un projet Supabase DEDIE a Verdoxa
+-- A executer une seule fois dans un projet Supabase DEDIE a Vedoxa
 -- (Supabase > SQL Editor > New query > Run).
 --
 -- Les recompenses (catalogue de lots, attribution aux gagnants) ne
@@ -10,7 +10,7 @@
 -- Apparence generale du site (nom, logo, couleurs)
 create table if not exists settings (
   id int primary key default 1,
-  site_name text not null default 'Verdoxa',
+  site_name text not null default 'Vedoxa',
   logo_url text,
   primary_color text not null default '#1e2a5e',
   secondary_color text not null default '#c23b3b',
@@ -22,7 +22,7 @@ insert into settings (id) values (1) on conflict (id) do nothing;
 -- niveau de difficulte
 create table if not exists fbi_settings (
   id int primary key default 1 check (id = 1),
-  title text not null default 'Verdoxa',
+  title text not null default 'VEDOXA',
   subtitle text not null default 'Grandis dans la connaissance de la Parole, un defi a la fois.',
   intro_text text not null default 'Ouvert a tous, gratuit, sans inscription. Indique juste ton nom et releve le defi.',
   is_active boolean not null default true,

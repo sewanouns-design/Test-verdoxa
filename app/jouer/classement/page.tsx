@@ -17,7 +17,7 @@ export default async function InfiniteLeaderboardPage() {
     <div>
       <div className="hero-banner">
         <div className="hero-badge">🏆</div>
-        <h1>Classement Verdoxa</h1>
+        <h1>Classement Vedoxa</h1>
         <p>Les meilleurs défis relevés jusqu&apos;ici.</p>
       </div>
 

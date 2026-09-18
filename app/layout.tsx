@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
   return {
     title: settings.siteName,
-    description: "Grandir dans la connaissance de la Parole de Dieu grâce à des quiz et des tests bibliques.",
+    description: "Evaluations hebdomadaires en ligne",
     icons: {
       icon: "/icon-192.png",
       apple: "/apple-touch-icon.png",
