@@ -4,8 +4,9 @@ import { INFINITE_QUESTIONS } from "@/lib/infiniteQuestions";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const [{ data: settings }, { data: questions, error }] = await Promise.all([
+  const [{ data: quizSettings }, { data: siteSettings }, { data: questions, error }] = await Promise.all([
     supabaseAdmin.from("fbi_settings").select("*").eq("id", 1).maybeSingle(),
+    supabaseAdmin.from("settings").select("hero_support, intro_title, intro_text, challenge_title, challenge_text, signoff").eq("id", 1).maybeSingle(),
     supabaseAdmin.from("fbi_questions").select("*").order("difficulty").order("created_at", { ascending: true }),
   ]);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
@@ -26,7 +27,7 @@ export async function GET() {
     const seeded = await supabaseAdmin.from("fbi_questions").upsert(seed, { onConflict: "external_id" }).select("*");
     if (!seeded.error && seeded.data) finalQuestions = seeded.data;
   }
-  return NextResponse.json({ settings, questions: finalQuestions });
+  return NextResponse.json({ settings: { ...(quizSettings || {}), ...(siteSettings || {}) }, questions: finalQuestions });
 }
 
 function cleanQuestion(q: any) {

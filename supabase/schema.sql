@@ -99,6 +99,22 @@ alter table fbi_questions enable row level security;
 alter table fbi_scores enable row level security;
 alter table fbi_played_questions enable row level security;
 
+-- Le trigger de mise a jour automatique garde updated_at fiable.
+create or replace function set_updated_at() returns trigger as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$ language plpgsql;
+
+drop trigger if exists fbi_scores_updated_at on fbi_scores;
+create trigger fbi_scores_updated_at before update on fbi_scores
+for each row execute function set_updated_at();
+
+drop trigger if exists fbi_questions_updated_at on fbi_questions;
+create trigger fbi_questions_updated_at before update on fbi_questions
+for each row execute function set_updated_at();
+
 -- Toutes les lectures/ecritures passent par le serveur (route handlers
 -- Next.js) avec la cle "service role", qui contourne RLS. Aucune
 -- policy publique n'est donc necessaire ici : le navigateur ne parle
