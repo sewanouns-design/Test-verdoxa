@@ -13,7 +13,7 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
   return {
     name: settings.siteName,
     short_name: shortName,
-    description: "Evaluations hebdomadaires en ligne",
+    description: "Grandir dans la connaissance de la Parole de Dieu grâce à des quiz et des tests bibliques.",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

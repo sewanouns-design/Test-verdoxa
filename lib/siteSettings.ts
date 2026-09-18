@@ -8,10 +8,10 @@ export interface SiteSettings {
 }
 
 const DEFAULTS: SiteSettings = {
-  siteName: "Eglise - Evaluations",
+  siteName: "Verdoxa",
   logoUrl: null,
-  primaryColor: "#1e2a5e",
-  secondaryColor: "#c23b3b",
+  primaryColor: "#0D4B3E",
+  secondaryColor: "#F0B93D",
 };
 
 export async function getSiteSettings(): Promise<SiteSettings> {

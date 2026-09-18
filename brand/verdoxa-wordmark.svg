@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 152" role="img" aria-labelledby="title desc">
+<title id="title">Verdoxa</title><desc id="desc">Logo Verdoxa : livre ouvert, chemin de croissance et pousse</desc>
+<g transform="translate(8 13)">
+  <path d="M8 103 Q52 70 100 100 Q142 72 186 103 L186 127 Q142 98 100 126 Q52 98 8 127Z" fill="#0D4B3E"/>
+  <path d="M14 103 Q54 78 99 106 Q141 79 180 103" fill="none" stroke="#F0B93D" stroke-width="7" stroke-linecap="round"/>
+  <path d="M99 105 C89 83 92 63 104 46 C116 30 122 18 116 7 C140 24 145 47 133 64 C125 76 112 88 99 105Z" fill="#F0B93D"/>
+  <path d="M101 43 C91 30 93 16 104 4 C116 14 119 27 111 41Z" fill="#0D4B3E"/>
+</g>
+<text x="222" y="98" font-family="Georgia, 'Times New Roman', serif" font-size="68" font-weight="700" letter-spacing="-1.5" fill="#0D4B3E">Verdoxa</text>
+</svg>

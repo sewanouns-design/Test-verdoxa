@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="Chargement de Verdoxa">
+<circle cx="80" cy="80" r="63" fill="none" stroke="#DCEBE4" stroke-width="8"/>
+<path d="M80 17a63 63 0 0 1 59 41" fill="none" stroke="#F0B93D" stroke-width="8" stroke-linecap="round"/>
+<path d="M20 98 Q50 72 80 94 Q110 72 140 98 L140 121 Q110 99 80 122 Q50 99 20 121Z" fill="#0D4B3E"/>
+<path d="M80 100 C70 78 73 59 85 44 C95 32 100 21 95 12 C117 29 119 49 108 64 C100 75 89 89 80 100Z" fill="#F0B93D"/>
+</svg>
