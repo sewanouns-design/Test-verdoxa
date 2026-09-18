@@ -229,7 +229,7 @@ function clearProgress() {
 
 export default function InfiniteQuizPage() {
   const [phase, setPhase] = useState<Phase>("intro");
-  const [studentName, setStudentName] = useState("");
+  const [studentName, setStudentName] = useState("JESUGNON Jean");
   const [contactEmail, setContactEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [contactConsent, setContactConsent] = useState(false);
@@ -783,11 +783,14 @@ export default function InfiniteQuizPage() {
 
   if (phase === "intro") {
     return (
-      <div>
-        <div className="hero-banner">
-          <div className="hero-badge">🔥</div>
-          <h1>Verdoxa</h1>
-          <p>Enchaîne les niveaux et vois jusqu&apos;où tu peux aller !</p>
+      <div className="quiz-intro-page">
+        <div className="hero-banner quiz-hero">
+          <div className="quiz-hero-copy">
+            <span className="eyebrow"><span aria-hidden="true">✦</span> Ton aventure commence ici</span>
+            <h1>Verdoxa</h1>
+            <p>Teste tes connaissances. Découvre la Parole. Progresse à ton rythme.</p>
+          </div>
+          <div className="quiz-hero-mark" aria-hidden="true">🔥</div>
         </div>
 
         {cancelledMessage && (
@@ -816,26 +819,34 @@ export default function InfiniteQuizPage() {
             </button>
           </div>
         ) : (
-          <div className="card">
-            <h2>Comment ça marche ?</h2>
-            <p className="muted" style={{ marginTop: -4 }}>
-              8 questions par niveau. La difficulté augmente à chaque niveau
-              franchi. Chaque bonne réponse te rapporte des points et une
-              référence biblique pour approfondir. Vise le meilleur score
-              possible !
+          <div className="card quiz-start-card">
+            <div className="quiz-start-heading">
+              <div>
+                <span className="eyebrow">Le parcours en 3 étapes</span>
+                <h2>Prêt à relever le défi ?</h2>
+              </div>
+              <span className="quiz-start-icon" aria-hidden="true">📖</span>
+            </div>
+            <div className="quiz-steps" aria-label="Fonctionnement du quiz">
+              <div><b>01</b><span>Réponds</span></div>
+              <div><b>02</b><span>Progresse</span></div>
+              <div><b>03</b><span>Grandis</span></div>
+            </div>
+            <p className="muted quiz-intro-text">
+              8 questions par niveau, une difficulté qui monte progressivement et une référence biblique après chaque réponse. Avance avec curiosité, pas besoin d’être parfait pour commencer.
             </p>
-            <label htmlFor="infiniteName">Ton nom et prénom</label>
+            <label htmlFor="infiniteName">Comment devons-nous t&apos;appeler ?</label>
             <input
               id="infiniteName"
               type="text"
               value={studentName}
               onChange={(e) => setStudentName(e.target.value)}
-              placeholder="Ex: Marie AGBOSSOU"
+              placeholder="Ex: JESUGNON Jean"
             />
 
             <details style={{ marginTop: 16 }}>
               <summary style={{ cursor: "pointer", fontWeight: 600 }}>
-                📩 Recevoir des infos, ou etre contacte(e) si tu es dans les premiers (facultatif)
+                <span aria-hidden="true">📩</span> Recevoir les nouveautés Verdoxa <span className="optional-label">Facultatif</span>
               </summary>
               <p className="muted" style={{ marginTop: 8 }}>
                 Tu peux laisser ton e-mail ou ton WhatsApp si tu souhaites être recontacté(e) — par exemple si tu fais partie des premiers du classement. Ces champs ne sont pas nécessaires pour participer.
@@ -869,8 +880,8 @@ export default function InfiniteQuizPage() {
               )}
             </details>
             {errorMsg && <p className="error-text">{errorMsg}</p>}
-            <button type="button" className="btn" onClick={handleStart}>
-              Commencer le défi 🚀
+            <button type="button" className="btn quiz-start-btn" onClick={handleStart}>
+              C&apos;est parti, je joue <span aria-hidden="true">🚀</span>
             </button>
           </div>
         )}
